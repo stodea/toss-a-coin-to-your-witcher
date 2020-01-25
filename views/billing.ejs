@@ -13,7 +13,9 @@
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
@@ -338,16 +340,36 @@
           </ul>
 
         </nav>-->
-        <!-- End of Topbar -->
+          <!-- End of Topbar -->
 
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
 
-          <!-- Page Heading -->
-          <h1 class="h3 mt=3 mb-4 text-gray-800">Billing</h1>
-
-        </div>
-        <!-- /.container-fluid -->
+            <!-- Page Heading -->
+            <h1 class="h3 mt=3 mb-4 text-gray-800">Billing</h1>
+            <% if (subscriptionActive) { %>
+            <p>Thanks for subbing!</p>
+            <% } else { %>
+            <button onclick="gotoCheckout()" class="btn btn-lg btn-success">Subscribe for $10/Month</button>
+            <% } %>
+            <script src="https://js.stripe.com/v3/"></script>
+            <script>
+              var stripe = Stripe('<%= STRIPE_PUBLIC_KEY %>');
+              function gotoCheckout() {
+                stripe.redirectToCheckout({
+                  // Make the id field from the Checkout Session creation API response
+                  // available to this file, so you can provide it as parameter here
+                  // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
+                  sessionId: '<%= sessionId %>'
+                }).then(function (result) {
+                  // If `redirectToCheckout` fails due to a browser or network
+                  // error, display the localized error message to your customer
+                  // using `result.error.message`.
+                });
+              }              
+            </script>
+          </div>
+          <!-- /.container-fluid -->
 
       </div>
       <!-- End of Main Content -->
@@ -374,7 +396,8 @@
   </a>
 
   <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
