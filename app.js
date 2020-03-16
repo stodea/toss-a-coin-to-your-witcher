@@ -12,6 +12,9 @@ var LocalStrategy = require('passport-local').Strategy;
 var dotenv = require('dotenv');
 dotenv.config();
 
+var fs = require('fs')
+var https = require('https')
+
 var User = mongoose.model('User');
 
 // Set your secret key: remember to change this to your live secret key in production
@@ -123,6 +126,14 @@ passport.deserializeUser(function (id, next) {
 app.get('/', function (req, res, next) {
   res.render('index', { title: "First" })
 });
+
+https.createServer({
+  key: fs.readFileSync('server.key'),
+  cert: fs.readFileSync('server.cert')
+}, app)
+.listen(3001, function () {
+  console.log('Example app listening on port 3000! Go to https://localhost:3000/')
+})
 
 app.get('/billing', function (req, res, next) {
   stripe.checkout.sessions.create({
