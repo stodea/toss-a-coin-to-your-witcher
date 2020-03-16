@@ -19,7 +19,7 @@ var User = mongoose.model('User');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 
-mongoose.connect('mongodb+srv://admin:wnkGs9xS762eSVWC@cluster0-ce5ak.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb+srv://admin:3MYB56gp3aG0AaWT@cluster0-ce5ak.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
 
 
 var app = express();
