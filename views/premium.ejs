@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>About</title>
+  <title>Premium</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -94,15 +94,28 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 text-gray-800">About this site:</h1>          
-          <h1 class="h5 text-gray-800">Did you know that salsa is now the number one condiment in America? You know why? Because people like to say "salsa." "Excuse me, do you have salsa?" "We need more salsa." "Where is the salsa? No salsa?"</h1>
-          <h1 class="h5 text-gray-800">You can probably buy salsa online, but not here, we don’t sell salsa here, we sell something else, something you won’t find anywhere in the world, we are in the business of selling nothing, not any kind of nothing, the truest nothing of them all. You read that right, nothing. I’ll say it again, nothing, and you’re paying for it.</h1>
-          <h1 class="h5 text-gray-800">“But, sir!” you might say, “Why should i pay for something and receive nothing?” Who says you have to always receive something? Forget the something, you’re now in the nothing acquiring business.</h1>
-          <h1 class="h5 text-gray-800">So when you go to the bank, to your accountant, to your significant other, to your friend, to whomever it might concern, and you tell them about this site and they’re gonna ask “What did you buy?” you say “Nothing”, and you won’t be lying.</h1>
-          <h1 class="h5 text-gray-800">So what is this site about?</h1>
-          <h1 class="h5 text-gray-800">It's about nothing? Absolutely nothing.</h1>
-          <h1 class="h5 text-gray-800">Everybody’s selling something, we sell nothing.</h1>                      
-          <h1 class="h5 text-gray-800">Click on the items on the left side and through the power of electricity and the internet you'll acquire any nothing you desire.</h1>
+          <h1 class="h3 text-gray-800">Premium</h1>          
+          <script src="https://js.stripe.com/v3/"></script>
+          <script>
+            var stripe = Stripe('<%= STRIPE_PUBLIC_KEY %>');
+            function gotoCheckout() {
+              stripe.redirectToCheckout({
+                // Make the id field from the Checkout Session creation API response
+                // available to this file, so you can provide it as parameter here
+                // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
+                sessionId: '<%= sessionId %>'
+              }).then(function (result) {
+                // If `redirectToCheckout` fails due to a browser or network
+                // error, display the localized error message to your customer
+                // using `result.error.message`.
+              });
+            }              
+          </script>
+          <h1 class="h5 text-gray-800">This is the Premium section, where Premium nothing is available. Top notch premium quality nothing can be bought here.</h1>          
+          <h1 class="h5 text-gray-800">Click bellow.</h1>            
+          <button onclick="gotoCheckout()" class="btn btn-lg btn-success">Premium $420</button>            
+          <hr class="sidebar-divider d-none d-md-block">
+          <h1 class="h5 text-gray-800">Thank you come again.</h1>
 
         </div>
         

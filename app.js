@@ -51,7 +51,7 @@ app.post('/pay-success', bodyParser.raw({ type: 'application/json' }), (request,
     User.findOne({
       email: session.customer_email
     }, function (err, user) {
-      if (user) {
+      if (session.mode==="subscription") {
         user.subscriptionActive = true;
         user.subscriptionId = session.subscription;
         user.customerId = session.customer;
@@ -121,10 +121,10 @@ passport.deserializeUser(function (id, next) {
 })
 
 app.get('/', function (req, res, next) {
-  res.render('index', { title: "First" })
+  res.render('index', { title: "About" })
 });
 
-app.get('/billing', function (req, res, next) {
+app.get('/subscription', function (req, res, next) {
   stripe.checkout.sessions.create({
     customer_email: req.user.email,
     payment_method_types: ['card'],
@@ -132,14 +132,71 @@ app.get('/billing', function (req, res, next) {
       items: [{
         plan: process.env.STRIPE_PLAN,
       }],
-    },
-    success_url: 'http://localhost:3000/billing?session_id={CHECKOUT_SESSION_ID}',
-    cancel_url: 'http://localhost:3000/billing',
+    },    
+    success_url: 'http://0e516779.ngrok.io/subscription?session_id={CHECKOUT_SESSION_ID}',
+    cancel_url: 'http://0e516779.ngrok.io/subscription',
   }, function (err, session) {
     if (err) return next(err);
-    res.render('billing', { STRIPE_PUBLIC_KEY: process.env.STRIPE_PUBLIC_KEY, sessionId: session.id, subscriptionActive: req.user.subscriptionActive })
+    res.render('subscription', { STRIPE_PUBLIC_KEY: process.env.STRIPE_PUBLIC_KEY, sessionId: session.id, subscriptionActive: req.user.subscriptionActive })
   });
 })
+
+app.get('/earlybird', function (req, res, next) {
+  stripe.checkout.sessions.create({
+    customer_email: req.user.email,
+    payment_method_types: ['card'],    
+    line_items: [{
+      name: 'Early bird',
+      description: 'Early bird nothing',      
+      amount: 6900,
+      currency: 'usd',
+      quantity: 1,
+    }],
+    success_url: 'http://0e516779.ngrok.io/earlybird?session_id={CHECKOUT_SESSION_ID}',
+    cancel_url: 'http://0e516779.ngrok.io/earlybird',
+  }, function (err, session) {
+    if (err) return next(err);
+    res.render('earlybird', { STRIPE_PUBLIC_KEY: process.env.STRIPE_PUBLIC_KEY, sessionId: session.id})
+  });
+})
+
+app.get('/premium', function (req, res, next) {
+  stripe.checkout.sessions.create({
+    customer_email: req.user.email,
+    payment_method_types: ['card'],    
+    line_items: [{
+      name: 'Premium',
+      description: 'Premium nothing',      
+      amount: 42000,
+      currency: 'usd',
+      quantity: 1,
+    }],
+    success_url: 'http://0e516779.ngrok.io/premium?session_id={CHECKOUT_SESSION_ID}',
+    cancel_url: 'http://0e516779.ngrok.io/premium',
+  }, function (err, session) {
+    if (err) return next(err);
+    res.render('premium', { STRIPE_PUBLIC_KEY: process.env.STRIPE_PUBLIC_KEY, sessionId: session.id})
+  });
+});
+
+app.get('/bigpp', function (req, res, next) {
+  stripe.checkout.sessions.create({
+    customer_email: req.user.email,
+    payment_method_types: ['card'],    
+    line_items: [{
+      name: 'Big PP',
+      description: 'Nothing',      
+      amount: 100000,
+      currency: 'usd',
+      quantity: 1,
+    }],
+    success_url: 'http://0e516779.ngrok.io/bigpp?session_id={CHECKOUT_SESSION_ID}',
+    cancel_url: 'http://0e516779.ngrok.io/bigpp',
+  }, function (err, session) {
+    if (err) return next(err);
+    res.render('bigpp', { STRIPE_PUBLIC_KEY: process.env.STRIPE_PUBLIC_KEY, sessionId: session.id})
+  });
+});
 
 app.get('/logout', function (req, res, next) {
   req.logout();
