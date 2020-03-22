@@ -133,8 +133,8 @@ app.get('/subscription', function (req, res, next) {
         plan: process.env.STRIPE_PLAN,
       }],
     },    
-    success_url: 'http://0e516779.ngrok.io/subscription?session_id={CHECKOUT_SESSION_ID}',
-    cancel_url: 'http://0e516779.ngrok.io/subscription',
+    success_url: 'http://42360b24.ngrok.io/subscription?session_id={CHECKOUT_SESSION_ID}',
+    cancel_url: 'http://42360b24.ngrok.io/subscription',
   }, function (err, session) {
     if (err) return next(err);
     res.render('subscription', { STRIPE_PUBLIC_KEY: process.env.STRIPE_PUBLIC_KEY, sessionId: session.id, subscriptionActive: req.user.subscriptionActive })
@@ -152,8 +152,8 @@ app.get('/earlybird', function (req, res, next) {
       currency: 'usd',
       quantity: 1,
     }],
-    success_url: 'http://0e516779.ngrok.io/earlybird?session_id={CHECKOUT_SESSION_ID}',
-    cancel_url: 'http://0e516779.ngrok.io/earlybird',
+    success_url: 'http://42360b24.ngrok.io/earlybird?session_id={CHECKOUT_SESSION_ID}',
+    cancel_url: 'http://42360b24.ngrok.io/earlybird',
   }, function (err, session) {
     if (err) return next(err);
     res.render('earlybird', { STRIPE_PUBLIC_KEY: process.env.STRIPE_PUBLIC_KEY, sessionId: session.id})
@@ -171,8 +171,8 @@ app.get('/premium', function (req, res, next) {
       currency: 'usd',
       quantity: 1,
     }],
-    success_url: 'http://0e516779.ngrok.io/premium?session_id={CHECKOUT_SESSION_ID}',
-    cancel_url: 'http://0e516779.ngrok.io/premium',
+    success_url: 'http://42360b24.ngrok.io/premium?session_id={CHECKOUT_SESSION_ID}',
+    cancel_url: 'http://42360b24.ngrok.io/premium',
   }, function (err, session) {
     if (err) return next(err);
     res.render('premium', { STRIPE_PUBLIC_KEY: process.env.STRIPE_PUBLIC_KEY, sessionId: session.id})
@@ -190,8 +190,8 @@ app.get('/bigpp', function (req, res, next) {
       currency: 'usd',
       quantity: 1,
     }],
-    success_url: 'http://0e516779.ngrok.io/bigpp?session_id={CHECKOUT_SESSION_ID}',
-    cancel_url: 'http://0e516779.ngrok.io/bigpp',
+    success_url: 'http://42360b24.ngrok.io/bigpp?session_id={CHECKOUT_SESSION_ID}',
+    cancel_url: 'http://42360b24.ngrok.io/bigpp',
   }, function (err, session) {
     if (err) return next(err);
     res.render('bigpp', { STRIPE_PUBLIC_KEY: process.env.STRIPE_PUBLIC_KEY, sessionId: session.id})
@@ -224,6 +224,14 @@ app.post('/login',
 
 app.get('/login-page', function (req, res, next) {
   res.render('login-page')
+});
+
+app.get('/terms', function (req, res, next) {
+  res.render('terms')
+});
+
+app.get('/termsandconditions', function (req, res, next) {
+  res.render('termsandconditions')
 });
 
 app.post('/signup',
