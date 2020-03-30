@@ -70,7 +70,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressSession({
-  secret: process.env.STRIPE_PLAN
+  secret: process.env.EXPRESS_SESSION_SECRET
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -148,7 +148,7 @@ app.get('/earlybird', function (req, res, next) {
     line_items: [{
       name: 'Early bird',
       description: 'Early bird nothing',      
-      amount: 6900,
+      amount: 100,
       currency: 'usd',
       quantity: 1,
     }],
