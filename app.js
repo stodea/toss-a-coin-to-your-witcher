@@ -124,6 +124,10 @@ app.get('/', function (req, res, next) {
   res.render('index', { title: "About" })
 });
 
+app.get('/ar', function (req, res, next) {
+  res.render('ar', { title: "AR" })
+});
+
 app.get('/subscription', function (req, res, next) {
   stripe.checkout.sessions.create({
     customer_email: req.user.email,
