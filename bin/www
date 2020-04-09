@@ -6,7 +6,11 @@
 
 var app = require('../app');
 var debug = require('debug')('first:server');
-var http = require('http');
+var fs = require('fs');
+var https = require('https');
+var privateKey  = fs.readFileSync('server.key');
+var bundle = fs.readFileSync('bundle.crt');
+var certificate = fs.readFileSync('server.crt');
 
 /**
  * Get port from environment and store in Express.
@@ -16,10 +20,13 @@ var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
- * Create HTTP server.
+ * Create HTTPS server.
  */
 
-var server = http.createServer(app);
+var server = https.createServer(
+  {key: privateKey, ca: bundle, cert: certificate},
+  app
+);
 
 /**
  * Listen on provided port, on all network interfaces.
