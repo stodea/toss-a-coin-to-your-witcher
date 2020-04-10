@@ -8,9 +8,9 @@ var app = require('../app');
 var debug = require('debug')('first:server');
 var fs = require('fs');
 var https = require('https');
-var privateKey  = fs.readFileSync('server.key');
-var bundle = fs.readFileSync('bundle.crt');
-var certificate = fs.readFileSync('server.crt');
+var privateKey  = fs.readFileSync('localServer.key');
+var bundle = fs.readFileSync('localBundle.crt');
+var certificate = fs.readFileSync('localServer.crt');
 
 /**
  * Get port from environment and store in Express.
