@@ -9701,7 +9701,7 @@ header.mastheadd {
 }
 
 header.mastheadd h1 {
-  font-size: 1.25rem;
+  font-size: 1.75rem;
 }
 
 @media (min-width: 992px) {
@@ -9715,7 +9715,7 @@ header.mastheadd h1 {
     font-size: 1.15rem;
   }
   header.mastheadd h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
 }
 
