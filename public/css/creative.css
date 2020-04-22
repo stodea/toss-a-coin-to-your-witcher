@@ -2290,14 +2290,14 @@ fieldset:disabled a.btn {
 
 .btn-secondary {
   color: #fff;
-  background-color: #6c757d;
-  border-color: #6c757d;
+  background-color: #191970;
+  border-color: #191970;
 }
 
 .btn-secondary:hover {
   color: #fff;
-  background-color: #5a6268;
-  border-color: #545b62;
+  background-color: #191970;
+  border-color: #191970;
 }
 
 .btn-secondary:focus, .btn-secondary.focus {
@@ -2306,8 +2306,8 @@ fieldset:disabled a.btn {
 
 .btn-secondary.disabled, .btn-secondary:disabled {
   color: #fff;
-  background-color: #6c757d;
-  border-color: #6c757d;
+  background-color: #191970;
+  border-color: #191970;
 }
 
 .btn-secondary:not(:disabled):not(.disabled):active, .btn-secondary:not(:disabled):not(.disabled).active,
@@ -9686,7 +9686,42 @@ header.masthead h1 {
 
 @media (min-width: 1200px) {
   header.masthead h1 {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
+  }
+}
+
+header.mastheadd {
+  padding-top: 10rem;
+  padding-bottom: calc(10rem - 72px);
+  background: url("../img/bg-mastheadd.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+}
+
+header.mastheadd h1 {
+  font-size: 1.25rem;
+}
+
+@media (min-width: 992px) {
+  header.mastheadd {
+    height: 100vh;
+    min-height: 40rem;
+    padding-top: 72px;
+    padding-bottom: 0;
+  }
+  header.mastheadd p {
+    font-size: 1.15rem;
+  }
+  header.mastheadd h1 {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  header.mastheadd h1 {
+    font-size: 2.5rem;
   }
 }
 

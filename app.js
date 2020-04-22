@@ -198,6 +198,24 @@ app.get('/bigpp', function (req, res, next) {
   });
 });
 
+app.get('/ovalleyofplenty', function (req, res, next) {
+  stripe.checkout.sessions.create({    
+    payment_method_types: ['card'],    
+    line_items: [{
+      name: 'A coin',
+      description: 'Fill your card details and toss the coin to your witcher',      
+      amount: 100,
+      currency: 'usd',
+      quantity: 1,
+    }],
+    success_url: process.env.BASE_URL + '/',
+    cancel_url: process.env.BASE_URL + '/',
+  }, function (err, session) {
+    if (err) return next(err);
+    res.render('ovalleyofplenty', { STRIPE_PUBLIC_KEY: process.env.STRIPE_PUBLIC_KEY, sessionId: session.id})
+  });  
+});
+
 app.get('/logout', function (req, res, next) {
   req.logout();
   res.redirect('/');
